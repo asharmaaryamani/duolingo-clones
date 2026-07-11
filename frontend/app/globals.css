@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "DIN Round Pro", "Nunito", "Segoe UI", Arial, sans-serif;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+  color: #3c3c3c;
+  font-family: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Duolingo's signature chunky 3D button: solid color + darker "bottom edge" shadow
+   that compresses when pressed. */
+.btn-duo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: transform 0.05s ease-in, box-shadow 0.05s ease-in, opacity 0.15s;
+  user-select: none;
+}
+
+.btn-duo:active {
+  transform: translateY(4px);
+  box-shadow: none !important;
+}
+
+.btn-duo:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-duo-green {
+  background-color: #58cc02;
+  color: white;
+  box-shadow: 0 4px 0 0 #45a302;
+}
+.btn-duo-green:hover:not(:disabled) {
+  background-color: #61e002;
+}
+
+.btn-duo-blue {
+  background-color: #1cb0f6;
+  color: white;
+  box-shadow: 0 4px 0 0 #1899d6;
+}
+
+.btn-duo-white {
+  background-color: white;
+  color: #58cc02;
+  border: 2px solid #e5e5e5;
+  box-shadow: 0 4px 0 0 #e5e5e5;
+}
+.btn-duo-white:hover:not(:disabled) {
+  background-color: #f7f7f7;
+}
+
+.btn-duo-red {
+  background-color: #ff4b4b;
+  color: white;
+  box-shadow: 0 4px 0 0 #e63e3e;
+}
+
+.btn-duo-outline {
+  background-color: white;
+  color: #afafaf;
+  border: 2px solid #e5e5e5;
+  box-shadow: 0 4px 0 0 #e5e5e5;
+}
+
+.card-duo {
+  border: 2px solid #e5e5e5;
+  border-radius: 16px;
+  box-shadow: 0 4px 0 0 #e5e5e5;
+  background: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e5e5e5;
+  border-radius: 8px;
+}
