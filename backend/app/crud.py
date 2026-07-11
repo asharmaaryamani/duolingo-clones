@@ -18,22 +18,32 @@ XP_LESSON_COMPLETE_BONUS = 15
 
 def get_or_create_default_user(db: Session) -> models.User:
     user = db.query(models.User).filter_by(username=DEFAULT_USERNAME).first()
+
+    # Existing user -> force demo mode values
     if user:
+        user.hearts = 999
+        user.max_hearts = 999
+        db.commit()
+        db.refresh(user)
         return user
+
+    # Create demo user
     user = models.User(
         username=DEFAULT_USERNAME,
         display_name="Alex",
         avatar_emoji="🦉",
         xp_total=0,
         streak_count=0,
-        hearts=5,
-        max_hearts=5,
+        hearts=999,
+        max_hearts=999,
         gems=500,
         daily_goal_xp=30,
     )
+
     db.add(user)
     db.commit()
     db.refresh(user)
+
     return user
 
 
@@ -164,12 +174,12 @@ def check_answer(db: Session, user: models.User, exercise_id: int, answer):
     is_correct = _normalize(answer) == _normalize(correct_answer)
 
     if not is_correct:
-        if user.hearts > 0:
-            user.hearts -= 1
-            if user.last_heart_lost_at is None:
-                user.last_heart_lost_at = dt.datetime.utcnow()
-            db.commit()
-            db.refresh(user)
+       if user.hearts > 0:
+        user.hearts -= 1
+        if user.last_heart_lost_at is None:
+            user.last_heart_lost_at = dt.datetime.utcnow()
+        db.commit()
+        db.refresh(user)
 
     return {
         "correct": is_correct,
